@@ -5,13 +5,13 @@
 class Fourtrack::Recorder
   require 'logger'
   NULL_LOGGER = Logger.new(nil)
-  def initialize(output_path:, flush_after_n:, logger: NULL_LOGGER)
+  def initialize(output_path:, flush_after:, logger: NULL_LOGGER)
     @output_path = File.expand_path(output_path)
     @pid_at_create = Process.pid
     @logger = logger
     @buf = []
     @mux = Mutex.new
-    @flush_every = flush_after_n
+    @flush_every = flush_after
     # Attempt to open the file for writing,
     # which will raise an exception outright if we do not have access
     File.open(@output_path, 'a') {}

@@ -17,7 +17,7 @@ and to replay later:
 
 ```ruby
 File.open(Rails.root.join('log/sql.jsonlines.gz')) do |f|
-  player = Fourtrac::Player.new(f)
+  player = Fourtrack::Player.new(f)
   player.each_line do |line|
     puts JSON.load(line)
   end

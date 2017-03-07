@@ -7,7 +7,7 @@ describe Fourtrack::Recorder do
   it 'flushes the written entries when the containing PID exits' do
     out = Tempfile.new 'rl_test'
     pid = fork do
-      replay_log = Fourtrack::Recorder.new(output_path: out.path, flush_after_n: 12)
+      replay_log = Fourtrack::Recorder.new(output_path: out.path, flush_after: 12)
       sleep 0.3
       3.times { replay_log << {hello: "Hi there stranger!"} }
     end
@@ -19,7 +19,7 @@ describe Fourtrack::Recorder do
   
   it 'does not flush the records twice if the parent process forks off a child' do
     out = Tempfile.new 'rl_test'
-    replay_log = Fourtrack::Recorder.new(output_path: out.path, flush_after_n: 512, logger: Logger.new($stderr))
+    replay_log = Fourtrack::Recorder.new(output_path: out.path, flush_after: 512, logger: Logger.new($stderr))
     
     # Accumulate some records from master
     14.times { replay_log << JSON.dump({parent: SecureRandom.hex(23)}) }
