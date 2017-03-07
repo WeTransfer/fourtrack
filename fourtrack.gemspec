@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Julik Tarkhanov"]
   spec.email         = ["me@julik.nl"]
 
-  spec.summary       = %q{Store massive ordered log records into a single .gz file.}
-  spec.description   = %q{and replay them one by one}
+  spec.summary       = %q{Store massive amounts of ordered log records into a single .gz file}
+  spec.description   = %q{Store massive amounts of ordered log records into a single .gz file and replay them one by one}
   spec.homepage      = "https://github.com/WeTransfer/fourtrack"
   spec.license       = "MIT"
 
