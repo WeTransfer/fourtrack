@@ -4,6 +4,18 @@ require 'json'
 require 'securerandom'
 
 describe Fourtrack::Recorder do
+  it 'dumps records verbatim' do
+    out = Tempfile.new 'rl_test'
+    replay_log = Fourtrack::Recorder.new(output_path: out.path, flush_after: 12)
+    replay_log << JSON.dump({foo: 123})
+    replay_log.flush!
+    
+    out.rewind
+    lines = Fourtrack::Player.new(out).readlines
+    readback = JSON.parse(lines[0], symbolize_names: true)
+    expect(readback).to eq({foo: 123})
+  end
+  
   it 'flushes the written entries when the containing PID exits' do
     out = Tempfile.new 'rl_test'
     pid = fork do

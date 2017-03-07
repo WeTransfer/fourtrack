@@ -60,7 +60,7 @@ class Fourtrack::Recorder
     @mux.synchronize do
       @logger.debug { "%s: Compressing %d records from PID %d" % [self, @buf.length, Process.pid] }
       z = Zlib::GzipWriter.new(io_buf)
-      @buf.each {|record| z.puts(JSON.dump(record) + "\n") }
+      @buf.each {|record| z.puts(record) }
       z.finish
       @buf.clear
     end
