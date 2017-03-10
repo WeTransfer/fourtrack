@@ -14,7 +14,7 @@ class Fourtrack::Recorder
     @flush_every = flush_after
     # Attempt to open the file for writing,
     # which will raise an exception outright if we do not have access
-    File.open(@output_path, 'a') {}
+    File.open(output_path, 'a') {}
     # and once we know we were able to open it, install an at_exit block for ourselves
     install_at_exit_hook!
   end
@@ -65,14 +65,17 @@ class Fourtrack::Recorder
       @buf.clear
     end
 
-    @logger.debug { "%s: Flushing to %s, size before flush %d" % [self, @output_path, File.size(@output_path)] }
-    File.open(@output_path, 'ab') { |f| f << io_buf.string }
-    @logger.debug { "%s: After flush to %s size %d" % [self, @output_path, File.size(@output_path)] }
+    File.open(output_path, 'ab') { |f| f << io_buf.string }
+    @logger.debug { "%s: After flush to %s size %d" % [self, output_path, File.size(output_path)] }
 
     io_buf.truncate(0)
   end
 
   private
+
+  def output_path
+    @output_path
+  end
 
   def install_at_exit_hook!
     at_exit { flush! if pending? }
