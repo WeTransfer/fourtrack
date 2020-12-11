@@ -1,3 +1,5 @@
+**Notice: this library is no longer being developed. We have found it to be difficult to use something like Fourtrack in a situation where one needs the logged events to be serialized in a deterministic sequence. Most likely you can achieve what Fourtrack was trying to do using the transaction log / replication log of your database.**
+
 # Fourtrack
 
 A gem for massive, parallel recording of streaming event logs for later replay. You know when you need one.
